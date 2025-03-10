@@ -1,0 +1,34 @@
+// Purpose: Ignore files and directories in Git
+# Ignore log files
+*.log
+
+# Ignore build directories
+dist/
+build/
+.devcontainer/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore compiled files
+*.pyc
+*.pyo
+__pycache__/
+.pytest_cache/
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local
+
+# Ignore package lock files
+package-lock.json
