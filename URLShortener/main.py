@@ -1,18 +1,18 @@
 # main.py
+from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
+import hashlib
 import logging
-from pydantic import BaseModel, HttpUrl, field_validator
+from pydantic import BaseModel, HttpUrl
 from database import (
     get_url_by_short_url,
     get_url_by_original_url,
     insert_url,
     update_clicks,
 )
-import uuid
 import socket
-from datetime import datetime, timedelta
 
 # Create a FastAPI instance
 app = FastAPI()
@@ -69,6 +69,7 @@ expiry_date: str | None
 class ShortURLResponse(BaseModel):
     short_url: str
     expiry_date: str | None = None
+    status_code: int = 200
 
 """
 OriginalURLResponse: Response model for the /expand API 
@@ -79,6 +80,7 @@ class OriginalURLResponse(BaseModel):
     short_url: str
     expiry_date: str | None = None
     clicks: int = 0
+    status_code: int = 200
 
 """
 dns_lookup: Perform a DNS lookup on the URL to ensure it is valid.
@@ -93,6 +95,14 @@ def dns_lookup(url: str) -> bool:
     except socket.gaierror:
         logger.error(f"DNS lookup failed for URL: {url}")
         return False
+    
+"""
+generate_sha256_short_url: Generate a SHA-256 based short URL.
+"""
+def generate_short_url(original_url: str) -> str:
+    """Generate a SHA-256 based short URL (first `length` characters)."""
+    sha256_hash = hashlib.sha256(original_url.encode()).hexdigest()[:9]  # Take first `length` chars
+    return f"{BASE_DOMAIN}{sha256_hash}"
 
 
 # Define the API routes
@@ -133,8 +143,9 @@ async def shorten_url(request: URLRequest):
             detail="URL already shortened. Here is the shortened URL: "
             + url["short_url"],
         )
-
-    short_url = BASE_DOMAIN + str(uuid.uuid4())[:9]
+    
+    # New Short URL
+    short_url = generate_short_url(original_url)
 
     creation_date = datetime.now()
     expiry_date = (
@@ -145,7 +156,7 @@ async def shorten_url(request: URLRequest):
     expiry_date = expiry_date.strftime("%Y-%m-%d")
     insert_url(original_url, short_url, expiry_date)
     return ShortURLResponse(
-        short_url=short_url, expiry_date=expiry_date
+        short_url=short_url, expiry_date=expiry_date, status_code=200
     )
 
 
@@ -155,8 +166,8 @@ async def expand_url(
         ...,
         max_length=29,
         min_length=29,
-        regex=r"^myurlshortener\.live/",
-        example=f"{BASE_DOMAIN}123456789"
+        pattern=r"^myurlshortener\.live/",
+        examples=f"{BASE_DOMAIN}123456789"
     )
 ):
 
@@ -178,6 +189,7 @@ async def expand_url(
         short_url=url["short_url"],
         clicks=url["clicks"],
         expiry_date=url["expiry_date"],
+        status_code=200
     )
 
 
@@ -187,8 +199,8 @@ async def redirect_url(
         ...,
         max_length=29,
         min_length=29,
-        regex=r"^myurlshortener\.live/",
-        example="myurlshortener.live/123456789",
+        pattern=r"^myurlshortener\.live/",
+        examples="myurlshortener.live/123456789",
     )
 ):
     url = get_url_by_short_url(short_url)

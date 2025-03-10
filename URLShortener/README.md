@@ -78,3 +78,15 @@ docker
     You can access the API documentation at `http://localhost:8000/docs`.
 
     You can alternatively test using Postman as well
+
+
+## Features
+1. Added Validation for Input to the APIs using Pydantic Models which provide constraints as well as Fast API features for input validation
+2. Added custom error messages and logging for better observability
+3. Used SHA-256 upto 9 characters. It is fast and simple for URL shortener. But we should be handling collisions. I have made the fields unique to ensure no duplicates exists. But collision has to be handled on API level as well. For small scale of few thousands or hundred thousands there are very less chances of collision but their might be chances when it comes to millions or biliions of records.
+## Scope for Improvement
+
+1. Handle collision
+2. Caching of frequently accessed URLs
+3. Adding rate limiter for production use for security purpose
+4. Remove the expired URLs from database using a scheduler or whenever the user will first time query the URL after it has expired.
