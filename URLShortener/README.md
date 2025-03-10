@@ -32,7 +32,8 @@ docker
 ```json
 {
   "short_url": "string",
-  "expiry_date": "string"
+  "expiry_date": "string",
+  "status_code": 200
 }
 ```
 
@@ -60,7 +61,8 @@ docker
   "original_url": "https://example.com/",
   "short_url": "string",
   "expiry_date": "string",
-  "clicks": 0
+  "clicks": 0,
+  "status_code": 200
 }
 ```
 
