@@ -1,0 +1,19 @@
+# Ignore the database file
+database.db
+
+# Ignore VSCode settings directory
+.vscode/
+.devcontainer/
+
+# Ignore Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore local environment files
+.env
+app.log

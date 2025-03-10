@@ -1,0 +1,4 @@
+2025-03-10 00:02:33 - main - ERROR - DNS lookup failed for URL: https://sssssssss.comm/
+2025-03-10 00:02:42 - main - ERROR - DNS lookup failed for URL: https://sssssssss.comm/
+2025-03-10 00:11:56 - main - ERROR - atching original URL not found for given input: myurlshortener.live/123456789
+2025-03-10 00:14:34 - main - ERROR - Matching original URL not found for given input: {short_url}. Redirect failed.
