@@ -31,33 +31,36 @@ docker
 **Response**:
 ```json
 {
-    "shortened_url": "string"
+  "short_url": "string",
+  "expiry_date": "string"
 }
 ```
 
-### Redirect to Original URL
+### Redirects to Original URL
 
-**Endpoint**: `/{shortened_url}`
+**Endpoint**: `/redirect/{shortened_url}`
 
 **Method**: `GET`
 
-**Description**: Redirects to the original long URL based on the shortened URL.
+**Description**: Redirects to the original long URL based on the shortened URL and updates the click value as well.
 
 **Response**: Redirects to the original URL.
 
-### Get URL Details
+### Get Original URL
 
-**Endpoint**: `/details/{shortened_url}`
+**Endpoint**: `/expand/{shortened_url}`
 
 **Method**: `GET`
 
-**Description**: Retrieves details about the shortened URL, such as the original URL and creation date.
+**Description**: Retrieves details about the URL, such as the original URL, URL Expiry and clicks on the URL. 
 
 **Response**:
 ```json
 {
-    "original_url": "string",
-    "created_at": "string"
+  "original_url": "https://example.com/",
+  "short_url": "string",
+  "expiry_date": "string",
+  "clicks": 0
 }
 ```
 
