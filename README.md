@@ -73,9 +73,9 @@ docker
 ### Using Docker
 
 1. **Build the Docker image**:
-    ```docker build --pull --rm -f 'URLShortener\dockerfile' -t 'actuate:latest' 'URLShortener' ```
+    ```docker build --pull --rm -t 'actuate:latest' '.' ```
 
-2. **Run the Docker container**:
+2. **Run the Docker container on port 8000**:
     ```docker run --rm -d -p 8000:8000/tcp actuate:latest ```
 
 3. **API Documentation and Testing**:
