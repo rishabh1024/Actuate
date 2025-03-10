@@ -8,3 +8,4 @@
 - **Docker**: Containerization platform to package the application and its dependencies. Easy to run and test
 
 ## Project Structure
+
