@@ -1,5 +1,7 @@
 # Actuate Coding Exercise
 
+![alt text](image.png)
+
 ## Technologies/Libraries Used
 
 - **FastAPI**: Provides great documentation using SwaggerUI and integration with Pydantic models for type safety and async functionality.
