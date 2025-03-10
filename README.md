@@ -1,5 +1,10 @@
 # Actuate Coding Exercise
 
+## Overview
+
+This project is a URL shortening service built with FastAPI. It allows users to shorten long URLs, expand shortened URLs back to their original form, and redirect to the original URLs using the shortened URLs.
+
+
 ![alt text](image-1.png)
 
 ## Technologies/Libraries Used
@@ -8,11 +13,6 @@
 - **Pydantic**: Eases user input validation. Has various data types such as `HttpUrl`, `Datetime`, as well as functionality to create custom data types using field validators.
 - **SQLite3**: Easy to use database for prototyping and development purposes.
 - **Docker**: Containerization platform to package the application and its dependencies. Easy to run and test
-
-## Project Structure
-main.py file as the APIs
-database.py creates the database and has other functions for database manipulation
-docker
 
 ## APIs
 ### Shorten URL
