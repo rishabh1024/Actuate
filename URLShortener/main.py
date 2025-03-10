@@ -160,7 +160,7 @@ async def shorten_url(request: URLRequest):
     )
 
 
-@app.get("/expand", response_model=OriginalURLResponse)
+@app.get("/expand", tags=["Retrieve Original URL"], response_model=OriginalURLResponse)
 async def expand_url(
     short_url: str = Query(
         ...,
@@ -193,7 +193,7 @@ async def expand_url(
     )
 
 
-@app.get("/redirect")
+@app.get("/redirect", tags=["Redirect to Original URL"],)
 async def redirect_url(
     short_url: str = Query(
         ...,
